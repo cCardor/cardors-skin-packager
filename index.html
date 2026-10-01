@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cardor's Skin Packager</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="alternate icon" type="image/x-icon" href="icon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.0.0/bundles/skinview3d.bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+</head>
+<body>
+  <header><div class="brand"><img class="brand-logo" src="logo.png" alt="Cardor logo"><div><h1>Cardor's Skin Packager</h1><p>Organize and package your Minecraft skin collection</p></div></div><label class="button primary" for="skinFiles">＋ Add skins</label><input id="skinFiles" type="file" accept="image/png" multiple hidden></header>
+  <main>
+    <section class="toolbar">
+      <div class="toolbar-heading"><div><h2>Skin collection</h2><p id="count">No skins added yet</p></div><button id="clearAll" class="button quiet" disabled>Clear all</button></div>
+      <div class="batch"><label class="field grow"><span>Naming format · model detected automatically</span><select id="globalFormat"><option value="a_{name}">a_Name / s_Name</option><option value="{name}_customSlim">Name_customSlim / Name_custom</option><option value="customSlim_{name}">customSlim_Name / custom_Name</option></select></label><label class="field grow"><span>Skin type</span><select id="globalType"><option value="teen">Teen</option><option value="nonhuman">Non-human</option></select></label></div>
+    </section>
+    <section id="empty" class="empty"><div class="empty-icon">＋</div><h2>Drop your skins here</h2><p>Select or drop multiple PNG skin files to get started.</p><label class="button primary" for="skinFiles">Select skin files</label></section>
+    <section id="grid" class="grid"></section>
+    <details id="suggestions" class="suggestions-panel"><summary><span><b>Name suggestions</b><small>Choose a skin number, then assign a name</small></span><span class="accordion-chevron">⌄</span></summary><div id="suggestionGroups" class="suggestion-groups"></div></details>
+    <div id="packbar" class="packbar" hidden><div><b id="readyCount">0 skins ready</b><span>Create a ZIP archive with these names</span></div><button id="pack" class="button primary">⇩　Package</button></div>
+  </main>
+  <dialog id="packDialog"><form method="dialog" id="packForm"><div class="dialog-head"><div><h2>Create skin package</h2><p>Choose a name for the ZIP file and its folder.</p></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div><label class="field"><span>Folder name</span><input id="folderName" value="Skins" required></label><label class="check pack-check"><input id="sameZipFolder" type="checkbox" checked><span>Use the same name for ZIP and folder</span></label><label class="field" id="zipNameField"><span>ZIP name</span><input id="zipName" value="Skins" required></label><div class="dialog-actions"><button class="button quiet" value="cancel">Cancel</button><button class="button primary" id="createZip" value="default">Download ZIP</button></div></form></dialog>
+  <div id="toast" role="status"></div>
+  <script src="name-suggestions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
